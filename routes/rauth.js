@@ -1,16 +1,21 @@
 const supabase = require("../services/authservices");
+const addUser = require("../services/databaseservices");
 
 
 function authRoutes (fastify, options, done){
   fastify.post('/register', async (request, reply) => {
-  
+    let req = {}
+    req.email = request.body.email
+    req.password = request.body.password
+
     try {
-        const { error, user, session } = await supabase.auth.signUp(request.body);
-  
+        const { error, user, session } = await supabase.auth.signUp(req);
+        
         if (error) {
             console.error(error);
             reply.code(400).send({ error: error.message });
         } else {
+            addUser(request.body.username, request.body.email)
             reply.send({ user, session }); // Send success response with user and session data
         }
     } catch (err) {

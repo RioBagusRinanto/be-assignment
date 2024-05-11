@@ -3,6 +3,9 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
@@ -13,9 +16,7 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   username  String
-  passwordHash String
   email     String
-  // Define other user fields here
   paymentAccounts PaymentAccount[]
   paymentHistories PaymentHistory[]
 }
@@ -24,9 +25,10 @@ model User {
 model PaymentAccount {
   id         Int      @id @default(autoincrement())
   accountType String
-  // Define other fields related to payment account
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
+  transactions Transaction[]
+  paymentHistories PaymentHistory[]
 }
 
 // Payment History table
@@ -36,9 +38,10 @@ model PaymentHistory {
   amount        Float
   timestamp     DateTime
   status        String
-  // Define other fields related to payment history
   user          User     @relation(fields: [userId], references: [id])
   userId        Int
+  account          PaymentAccount     @relation(fields: [accountId], references: [id])
+  accountId        Int
 }
 
 // Transaction table
@@ -49,5 +52,6 @@ model Transaction {
   timestamp  DateTime
   toAddress  String
   status     String
-  // Define other fields related to transaction
+  account          PaymentAccount     @relation(fields: [accountId], references: [id])
+  accountId        Int
 }

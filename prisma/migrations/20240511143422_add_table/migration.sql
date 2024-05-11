@@ -2,7 +2,6 @@
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "username" TEXT NOT NULL,
-    "passwordHash" TEXT NOT NULL,
     "email" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -25,6 +24,7 @@ CREATE TABLE "PaymentHistory" (
     "timestamp" TIMESTAMP(3) NOT NULL,
     "status" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
+    "accountId" INTEGER NOT NULL,
 
     CONSTRAINT "PaymentHistory_pkey" PRIMARY KEY ("id")
 );
@@ -37,6 +37,7 @@ CREATE TABLE "Transaction" (
     "timestamp" TIMESTAMP(3) NOT NULL,
     "toAddress" TEXT NOT NULL,
     "status" TEXT NOT NULL,
+    "accountId" INTEGER NOT NULL,
 
     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
 );
@@ -46,3 +47,9 @@ ALTER TABLE "PaymentAccount" ADD CONSTRAINT "PaymentAccount_userId_fkey" FOREIGN
 
 -- AddForeignKey
 ALTER TABLE "PaymentHistory" ADD CONSTRAINT "PaymentHistory_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PaymentHistory" ADD CONSTRAINT "PaymentHistory_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "PaymentAccount"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "PaymentAccount"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
