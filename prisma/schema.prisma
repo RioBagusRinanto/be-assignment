@@ -25,6 +25,7 @@ model User {
 model PaymentAccount {
   id         Int      @id @default(autoincrement())
   accountType String
+  balance        BigInt
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
   transactions Transaction[]

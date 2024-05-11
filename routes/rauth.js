@@ -7,7 +7,7 @@ function authRoutes (fastify, options, done){
     let req = {}
     req.email = request.body.email
     req.password = request.body.password
-
+ 
     try {
         const { error, user, session } = await supabase.auth.signUp(req);
         
@@ -15,7 +15,7 @@ function authRoutes (fastify, options, done){
             console.error(error);
             reply.code(400).send({ error: error.message });
         } else {
-            addUser(request.body.username, request.body.email)
+            addUser(request.body.username, request.body.email, request.body.accounts)
             reply.send({ user, session }); // Send success response with user and session data
         }
     } catch (err) {
