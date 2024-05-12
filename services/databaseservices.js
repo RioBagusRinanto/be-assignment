@@ -11,8 +11,18 @@ async function addUser(username, email, accountsType) {
           email: email
         },
       });
+      console.log("sampe sini")
       if(newUser.id != null){
-        await Promise.all(accountsType.map(accountType => addUserAccount(newUser.id, accountType))); // Use Promise.all to await all addUserAccount calls
+        let tempReq = []
+        accountsType.forEach(type => {
+            tempReq.push({accountType: type, userId: newUser.id, balance: 1000000})
+        });
+        const newAccount = await prisma.paymentAccount.createMany({
+            data: tempReq,
+          });
+
+          console.log(newAccount)
+        // await Promise.all(accountsType.map(accountType => addUserAccount(newUser.id, accountType))); // Use Promise.all to await all addUserAccount calls
       }
       console.log('User added successfully:', newUser);
     } catch (error) {
@@ -25,14 +35,15 @@ async function addUser(username, email, accountsType) {
 async function addUserAccount(userId, accountType) {
     //insert many data to account table with accountstype and userId column
     try {
-        const newAccount = await prisma.paymentaccount.create({
-          data: {
-            accountType: accountType,
-            userId: userId,
-            balance: 1000000
-          },
-        });
-        console.log('Account added successfully:', newAccount);
+        // const newAccount = await prisma.paymentAccount.create({
+        //   data: {
+        //     accountType: accountType,
+        //     userId: userId,
+        //     balance: 1000000
+        //   },
+        // });
+        
+        console.log('Account added successfully:', "newAccount");
       } catch (error) {
         console.error('Error adding account:', error);
       }
@@ -41,13 +52,13 @@ async function addUserAccount(userId, accountType) {
 async function checkBalance(accountId, amount) {
     //insert many data to account table with accountstype and userId column
     try {
-        const accountDetail = await prisma.paymentaccount.findUnique({
+        const accountDetail = await prisma.paymentAccount.findUnique({
             where: {
               id: accountId
             },
           })
         
-        let total = accountDetail.balance - amount
+        let total = accountDetail.balance - BigInt(amount)
         if(total < 0){
             console.log("issuficient balance")
             return 0
@@ -62,7 +73,7 @@ async function checkBalance(accountId, amount) {
 async function getBalance(accountId) {
     //insert many data to account table with accountstype and userId column
     try {
-        const accountDetail = await prisma.paymentaccount.findUnique({
+        const accountDetail = await prisma.paymentAccount.findUnique({
             where: {
               id: accountId
             },
@@ -74,7 +85,7 @@ async function getBalance(accountId) {
       }
 }
 
-async function addTransaction(accountId, amount, currency, address, status) {
+async function addTransaction(accountId, amount, currency, address, status, accounts) {
     //insert many data to account table with accountstype and userId column
     try {
         const currentTimestamp = new Date();
@@ -85,7 +96,8 @@ async function addTransaction(accountId, amount, currency, address, status) {
               currency: currency,
               timestamp: currentTimestamp,
               toAddress: address,
-              status: status
+              status: status,
+              // account: accounts
             },
           });
         if(newTransaction.id != null){
@@ -114,8 +126,9 @@ async function updateTransactionStatus(status, transactionId) {
 }
 
 async function updatebalance(balance, accountId) {
+  console.log("balance -> ", balance)
     try {
-        const acocunt = await prisma.paymentaccount.update({
+        const acocunt = await prisma.paymentAccount.update({
             where: {
               id: accountId,
             },
@@ -149,21 +162,41 @@ async function getUser(email) {
 }
 
 async function getAccount(userId, accountType) {
-    
+    console.log(userId)
+    console.log(accountType)
     try {
-        const accountDetail = await prisma.paymentaccount.findUnique({
+        const accountDetail = await prisma.paymentAccount.findFirst({
             where: {
+              accountType: accountType,
               userId: userId,
-              accountType: accountType
             },
           })
         
-        if(accountDetail.id != null){
-            
-            return accountDetail
-        }else{
-            console.log("error get account")
+          if (!accountDetail) {
+            console.error('Account not found');
+            return null; // Return null or handle the absence of accountDetail in a different way
         }
+
+        return accountDetail;
+      } catch (error) {
+        console.error('Error :', error);
+      }
+}
+
+async function getAccountById(AccountId) {
+    try {
+        const accountDetail = await prisma.paymentAccount.findFirst({
+            where: {
+              id : AccountId
+            },
+          })
+        
+          if (!accountDetail) {
+            console.error('Account not found');
+            return null; // Return null or handle the absence of accountDetail in a different way
+        }
+
+        return accountDetail;
       } catch (error) {
         console.error('Error :', error);
       }
@@ -171,4 +204,15 @@ async function getAccount(userId, accountType) {
 
 
 
-module.exports = {addUser, checkBalance, addTransaction, updateTransactionStatus, getAccount, getUser, updatebalance, getBalance};
+module.exports = {
+    addUser,
+    checkBalance,
+    addTransaction,
+    updateTransactionStatus,
+    getAccount,
+    getAccountById,
+    getUser,
+    updatebalance,
+    getBalance,
+    prisma
+};

@@ -1,5 +1,5 @@
 const supabase = require("../services/authservices");
-const addUser = require("../services/databaseservices");
+const { addUser } = require("../services/databaseservices");
 
 
 function authRoutes (fastify, options, done){
@@ -16,7 +16,7 @@ function authRoutes (fastify, options, done){
             reply.code(400).send({ error: error.message });
         } else {
             addUser(request.body.username, request.body.email, request.body.accounts)
-            reply.send({ user, session }); // Send success response with user and session data
+            reply.code(200).send({ user, session }); // Send success response with user and session data
         }
     } catch (err) {
         console.error(err);

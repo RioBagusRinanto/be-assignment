@@ -6,6 +6,7 @@ const PORT = 8001
 //register routes
 fastify.register(require('./routes/raccount'))
 fastify.register(require('./routes/rauth'))
+fastify.register(require('./routes/rtransaction'))
 
 
 // Run the server!

@@ -1,32 +1,36 @@
-const { getAccount, checkBalance, addTransaction, updateTransactionStatus, getBalance, updatebalance } = require("../services/databaseservices");
+const { getAccount, checkBalance, addTransaction, updateTransactionStatus, getBalance, updatebalance, getAccountById } = require("../services/databaseservices");
+const processTransaction = require("../services/transactionservices");
 
 
 function transactionRoutes (fastify, options, done){
   
   fastify.post('/withdraw', async (request, reply) => {
-  
     try {
-        const accountId = getAccount(request.body.userId, request.accountType)
+        const accountId = await getAccount(request.body.userId, request.body.accountType)
+        console.log("accountid -> ", accountId)
         let amount = request.body.amount
         if(request.body.currency == "USD"){
             amount = amount * 15000
         }
-        const cekBalance = checkBalance(accountId.id, amount)
-        const currBalance = getBalance(accountId.id)
+        const cekBalance = await checkBalance(accountId.id, amount)
+        const currBalance = await getBalance(accountId.id)
         if (cekBalance == 0) {
             reply.code(500).send({error : 'Issuficient Balance'})
         }else{
-            let req
+            let req = {}
             req.accountId = accountId.id
             req.amount = amount
             req.currency = "IDR"
             req.address = "withdrawal"
             req.status = "processed"
-            const transaction = addTransaction(accountId.id, amount, "IDR", "withdrawal", "processed")
-            updatebalance(currBalance - amount, accountId.id)
+            const transaction = await addTransaction(accountId.id, amount, "IDR", "withdrawal", "processed", accountId)
+            console.log("curr balance -> ", currBalance)
+            console.log("amount -> ", amount)
+            updatebalance((currBalance - BigInt(amount)), accountId.id)
             processTransaction(req)
                 .then((processedTransaction) => {
                     console.log('transaction processing completed for:', processedTransaction);
+                    console.log(transaction)
                     if(transaction.id != null){
                         updateTransactionStatus("success", transaction.id)
                     }
@@ -44,28 +48,29 @@ function transactionRoutes (fastify, options, done){
   fastify.post('/send', async (request, reply) => {
   
     try {
-        const accounts = getAccount(request.body.userId, request.accountType)
+        const accounts = await getAccount(request.body.userId, request.body.accountType)
+        const recipientAccount = await getAccountById(request.body.recipient)
         let amount = request.body.amount
         if(request.body.currency == "USD"){
             amount = amount * 15000
         }
-        const cekBalance = checkBalance(accounts.id, amount)
+        const cekBalance = await checkBalance(accounts.id, amount)
         const currBalance = accounts.balance
         if (cekBalance == 0) {
             reply.code(500).send({error : 'Issuficient Balance'})
-        }else if(request.body.accountType != accounts.accountType){
+        }else if(request.body.accountType != recipientAccount.accountType){
             reply.code(500).send({error : "cannot send to other type of account"})
         }else {
-            let req
+            let req = {}
             req.accountId = accounts.id
             req.amount = amount
             req.currency = "IDR"
             req.address = "transfer to "+ request.body.recipient
             req.status = "processed"
             const transaction = addTransaction(accounts.id, amount, "IDR", "transfer to "+ request.body.recipient, "processed")
-            updatebalance(currBalance - amount, accounts.id)
+            updatebalance(currBalance - BigInt(amount), accounts.id)
             const receivetransaction = addTransaction(request.body.recipient, amount, "IDR", "received transfer from "+ accounts.id, "success")
-            updatebalance(currBalance - amount, request.body.recipient)
+            updatebalance(currBalance + BigInt(amount), request.body.recipient)
             processTransaction(req)
                 .then((processedTransaction) => {
                     console.log('transaction processing completed for:', processedTransaction);
