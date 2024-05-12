@@ -1,0 +1,188 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "be-assessment",
+    "collectionId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+    "dateExported": "2024-05-12T03:51:57.434Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "cdbad660-8d80-4267-bed2-4d2fc31b1630",
+            "colId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+            "containerId": "",
+            "name": "register",
+            "url": "localhost:8001/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-11T13:18:55.773Z",
+            "modified": "2024-05-12T00:25:46.912Z",
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"einsteinrio02@gmail.com\",\n  \"password\": \"iniPassword\",\n  \"username\": \"einsteinrio\",\n  \"accounts\": [\"debit\", \"credit\", \"loan\"]\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "44c51bb2-a354-4caa-9576-5f9473ad3944",
+            "colId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+            "containerId": "",
+            "name": "login",
+            "url": "localhost:8001/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-05-11T13:19:06.245Z",
+            "modified": "2024-05-11T13:24:17.983Z",
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"rluca1669@gmail.com\",\n  \"password\": \"iniPassword\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e6a8823e-1517-41c7-aa46-69d8f34853cf",
+            "colId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+            "containerId": "",
+            "name": "logout",
+            "url": "localhost:8001/logout",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-11T13:28:18.413Z",
+            "modified": "2024-05-12T03:51:42.594Z",
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"rluca1669@gmail.com\",\n  \"password\": \"iniPassword\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "ff961a17-2cb9-4ed6-9dcc-095c2783388c",
+            "colId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+            "containerId": "",
+            "name": "withdrawal",
+            "url": "localhost:8001/withdraw",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-05-11T15:57:11.019Z",
+            "modified": "2024-05-12T03:51:32.479Z",
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\": 3,\n  \"amount\": 20,\n  \"accountType\":\"debit\",\n  \"currency\": \"IDR\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlhXTmhVQnUxeWZhQjlnU00iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzE1NDg2MTYzLCJpYXQiOjE3MTU0ODI1NjMsImlzcyI6Imh0dHBzOi8vaXB5dmJ2eWJ2cmtqeWxyaWdpcHcuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiIsImVtYWlsIjoicmx1Y2ExNjY5QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJybHVjYTE2NjlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzE1NDgyNTYzfV0sInNlc3Npb25faWQiOiI0NjZkNzgyNC00YTljLTQwZTgtYmI5Mi04MzU2NzI3ZDQwNTEiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.omthyJ79KJMRdWabYqcLE_20SmyQ_OcBruFhKz8O1_8"
+            }
+        },
+        {
+            "_id": "11f27818-8751-42af-aa08-89e937242f59",
+            "colId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+            "containerId": "",
+            "name": "transfer",
+            "url": "localhost:8001/send",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-05-12T02:25:31.013Z",
+            "modified": "2024-05-12T03:51:25.824Z",
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\": 3,\n  \"amount\": 20000,\n  \"accountType\":\"credit\",\n  \"currency\": \"IDR\",\n  \"recipient\": 11\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlhXTmhVQnUxeWZhQjlnU00iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzE1NDg2MTYzLCJpYXQiOjE3MTU0ODI1NjMsImlzcyI6Imh0dHBzOi8vaXB5dmJ2eWJ2cmtqeWxyaWdpcHcuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiIsImVtYWlsIjoicmx1Y2ExNjY5QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJybHVjYTE2NjlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzE1NDgyNTYzfV0sInNlc3Npb25faWQiOiI0NjZkNzgyNC00YTljLTQwZTgtYmI5Mi04MzU2NzI3ZDQwNTEiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.omthyJ79KJMRdWabYqcLE_20SmyQ_OcBruFhKz8O1_8"
+            }
+        },
+        {
+            "_id": "9063b1e9-d1d9-4ba9-ba88-41bbffc6cf32",
+            "colId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+            "containerId": "",
+            "name": "history",
+            "url": "localhost:8001/history/10",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-05-12T02:38:15.728Z",
+            "modified": "2024-05-12T03:24:58.181Z",
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlhXTmhVQnUxeWZhQjlnU00iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzE1NDg2MTYzLCJpYXQiOjE3MTU0ODI1NjMsImlzcyI6Imh0dHBzOi8vaXB5dmJ2eWJ2cmtqeWxyaWdpcHcuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiIsImVtYWlsIjoicmx1Y2ExNjY5QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJybHVjYTE2NjlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzE1NDgyNTYzfV0sInNlc3Npb25faWQiOiI0NjZkNzgyNC00YTljLTQwZTgtYmI5Mi04MzU2NzI3ZDQwNTEiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.omthyJ79KJMRdWabYqcLE_20SmyQ_OcBruFhKz8O1_8",
+                    "isDisabled": true
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlhXTmhVQnUxeWZhQjlnU00iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzE1NDg2MTYzLCJpYXQiOjE3MTU0ODI1NjMsImlzcyI6Imh0dHBzOi8vaXB5dmJ2eWJ2cmtqeWxyaWdpcHcuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiIsImVtYWlsIjoicmx1Y2ExNjY5QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJybHVjYTE2NjlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzE1NDgyNTYzfV0sInNlc3Npb25faWQiOiI0NjZkNzgyNC00YTljLTQwZTgtYmI5Mi04MzU2NzI3ZDQwNTEiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.omthyJ79KJMRdWabYqcLE_20SmyQ_OcBruFhKz8O1_8"
+            }
+        },
+        {
+            "_id": "46d8f8e6-24f6-4e0c-8f5a-7710db1d9daa",
+            "colId": "ef4404d1-68a8-423f-85d4-e391feb5a25e",
+            "containerId": "",
+            "name": "history user",
+            "url": "localhost:8001/user/history/3",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-05-12T03:32:49.216Z",
+            "modified": "2024-05-12T03:34:00.204Z",
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlhXTmhVQnUxeWZhQjlnU00iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzE1NDg2MTYzLCJpYXQiOjE3MTU0ODI1NjMsImlzcyI6Imh0dHBzOi8vaXB5dmJ2eWJ2cmtqeWxyaWdpcHcuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiIsImVtYWlsIjoicmx1Y2ExNjY5QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJybHVjYTE2NjlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzE1NDgyNTYzfV0sInNlc3Npb25faWQiOiI0NjZkNzgyNC00YTljLTQwZTgtYmI5Mi04MzU2NzI3ZDQwNTEiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.omthyJ79KJMRdWabYqcLE_20SmyQ_OcBruFhKz8O1_8",
+                    "isDisabled": true
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlhXTmhVQnUxeWZhQjlnU00iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzE1NDg2MTYzLCJpYXQiOjE3MTU0ODI1NjMsImlzcyI6Imh0dHBzOi8vaXB5dmJ2eWJ2cmtqeWxyaWdpcHcuc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiIsImVtYWlsIjoicmx1Y2ExNjY5QGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWwiOiJybHVjYTE2NjlAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV92ZXJpZmllZCI6ZmFsc2UsInN1YiI6ImYzZjgwMDkzLTE4ODgtNDg3Zi05MTVjLTI4ZDlkYTY5ZTE2NiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzE1NDgyNTYzfV0sInNlc3Npb25faWQiOiI0NjZkNzgyNC00YTljLTQwZTgtYmI5Mi04MzU2NzI3ZDQwNTEiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.omthyJ79KJMRdWabYqcLE_20SmyQ_OcBruFhKz8O1_8"
+            }
+        }
+    ],
+    "ref": "67SgQrf04ct_VeNZH6ZhmsXG1XroBE-6j4DXQ8s-ZP0YAUJ6ygnvvED-PUqqQ7B44oI--dAVOpLWMmo6BMrASQ"
+}

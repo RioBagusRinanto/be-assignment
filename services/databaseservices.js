@@ -223,6 +223,40 @@ async function getHistoryById(AccountId) {
       }
 }
 
+async function getHistoryByUser(userId) {
+  try {
+      const userAccount = await prisma.paymentAccount.findMany({
+        where: {
+          userId : userId
+        }
+      })
+      let tempAccountList = []
+      userAccount.forEach(element => {
+        tempAccountList.push(element.id)
+      });
+      console.log(tempAccountList)
+      const history = await prisma.transaction.findMany({
+          where: {
+            accountId : {
+              in: tempAccountList
+            }
+          },
+          orderBy: {
+            timestamp: 'desc', // Order by createdDate in descending order
+          },
+        })
+      
+        if (!history) {
+          console.error('History not found');
+          return null; // Return null or handle the absence of accountDetail in a different way
+      }
+
+      return history;
+    } catch (error) {
+      console.error('Error :', error);
+    }
+}
+
 
 
 module.exports = {
@@ -236,5 +270,6 @@ module.exports = {
     updatebalance,
     getBalance,
     getHistoryById,
+    getHistoryByUser,
     prisma
 };

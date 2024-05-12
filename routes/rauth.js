@@ -33,7 +33,10 @@ function authRoutes (fastify, options, done){
             console.error(error);
             reply.code(401).send({ error: error.message }); // Unauthorized if login fails
         } else {
-            reply.send({ user, session }); // Send success response with user and session data
+            
+            const { data, error } = await supabase.auth.getSession()
+
+            reply.code(200).send({access_token_token: data.session.access_token}); // Send success response with user and session data
         }
     } catch (err) {
         console.error(err);
@@ -50,7 +53,7 @@ function authRoutes (fastify, options, done){
             console.error(error);
             reply.code(401).send({ error: error.message }); // Unauthorized if login fails
         } else {
-            reply.code(200).send({ message : error}); // Send success response with user and session data
+            reply.code(200).send({ message : "success logout"}); // Send success response with user and session data
         }
     } catch (err) {
         console.error(err);
