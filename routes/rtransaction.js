@@ -1,4 +1,4 @@
-const { getAccount, checkBalance, addTransaction, updateTransactionStatus, getBalance, updatebalance, getAccountById } = require("../services/databaseservices");
+const { getAccount, checkBalance, addTransaction, updateTransactionStatus, getBalance, updatebalance, getAccountById, getHistoryById } = require("../services/databaseservices");
 const processTransaction = require("../services/transactionservices");
 
 
@@ -86,6 +86,16 @@ function transactionRoutes (fastify, options, done){
         console.error(err);
         reply.code(500).send({ error: 'Internal server error' }); // Handle unexpected errors
     }
+  });
+
+  fastify.get('/history/:id', async(request, reply) => {
+        try {
+            console.log(request.params.id)
+            const historyresult = await getHistoryById(parseInt(request.params.id))
+            reply.code(200).send({status: "ok", history_result: historyresult})
+        } catch (error) {
+            reply.code(500).send({error: error})
+        }
   });
   
   

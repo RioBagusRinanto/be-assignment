@@ -201,6 +201,27 @@ async function getAccountById(AccountId) {
         console.error('Error :', error);
       }
 }
+async function getHistoryById(AccountId) {
+    try {
+        const history = await prisma.transaction.findMany({
+            where: {
+              accountId : AccountId
+            },
+            orderBy: {
+              timestamp: 'desc', // Order by createdDate in descending order
+            },
+          })
+        
+          if (!history) {
+            console.error('History not found');
+            return null; // Return null or handle the absence of accountDetail in a different way
+        }
+
+        return history;
+      } catch (error) {
+        console.error('Error :', error);
+      }
+}
 
 
 
@@ -214,5 +235,6 @@ module.exports = {
     getUser,
     updatebalance,
     getBalance,
+    getHistoryById,
     prisma
 };
